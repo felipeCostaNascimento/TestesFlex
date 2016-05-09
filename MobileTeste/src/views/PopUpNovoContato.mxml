@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Panel xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="Novo Contato">
+	
+	<fx:Script>
+		<![CDATA[
+			import mx.managers.PopUpManager;
+			
+			[Bindable] protected var txtNomePlaceholder:String = "Nome";
+			[Bindable] protected var txtTelefonePlaceholder:String = "Telefone";
+			[Bindable] protected var txtDDDPlaceholder:String = "DDD";
+			
+			private var nome:String;
+			private var ddd:String;
+			private var telefone:String;
+			
+			public var delegate:TesteView;
+			
+			protected function onTapCancelar(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				PopUpManager.removePopUp(this);
+			}
+			
+			protected function onTapAdicionar(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var contato:Object = {
+					Nome: nome,
+					Telefone: ddd + " " + telefone
+				};
+				delegate.inserirNovoContato(contato);
+				PopUpManager.removePopUp(this);
+			}
+			
+			protected function onFocusInNome(event:FocusEvent):void
+			{
+				// TODO Auto-generated method stub
+				var txtNome:TextInput = event.currentTarget as TextInput;
+				if(txtNome.text == txtNomePlaceholder){
+					txtNome.text = "";
+				}
+			}
+			
+			protected function onFocusInTelefone(event:FocusEvent):void
+			{
+				// TODO Auto-generated method stub
+				var txtTelefone:TextInput = event.currentTarget as TextInput;
+				if(txtTelefone.text == txtTelefonePlaceholder){
+					txtTelefone.text = "";
+				}
+			}
+			
+			protected function onFocusOutNome(event:FocusEvent):void
+			{
+				// TODO Auto-generated method stub
+				var txtNome:TextInput = event.currentTarget as TextInput;
+				if(txtNome.text == ""){
+					txtNome.text = txtNomePlaceholder;
+				}else{
+					nome = txtNome.text;
+				}
+				
+				
+			}
+			
+			protected function onFocusOutTelefone(event:FocusEvent):void
+			{
+				// TODO Auto-generated method stub
+				var txtTelefone:TextInput = event.currentTarget as TextInput;
+				if(txtTelefone.text == ""){
+					txtTelefone.text = txtTelefonePlaceholder;
+				}else{
+					telefone = txtTelefone.text;
+				}
+				
+			}
+			
+			protected function onFocusInDDD(event:FocusEvent):void
+			{
+				// TODO Auto-generated method stub
+				var txtDDD:TextInput = event.currentTarget as TextInput;
+				if(txtDDD.text == txtDDDPlaceholder){
+					txtDDD.text = "";
+				}
+			}
+			
+			protected function onFocusOutDDD(event:FocusEvent):void
+			{
+				// TODO Auto-generated method stub
+				var txtDDD:TextInput = event.currentTarget as TextInput;
+				if(txtDDD.text == ""){
+					txtDDD.text = txtDDDPlaceholder;
+				}else{
+					ddd = txtDDD.text;
+				}
+			}
+			
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:VGroup width="100%" paddingTop="15" paddingBottom="15" paddingLeft="15" paddingRight="15">
+		<s:VGroup width="100%">
+			<s:TextInput text="{txtNomePlaceholder}" width="100%" height="40" focusIn="onFocusInNome(event)" focusOut="onFocusOutNome(event)" />
+			<s:HGroup width="100%">
+				<s:TextInput text="{txtDDDPlaceholder}" width="20%" height="40" focusIn="onFocusInDDD(event)" focusOut="onFocusOutDDD(event)" />
+				<s:TextInput text="{txtTelefonePlaceholder}" width="80%" height="40" focusIn="onFocusInTelefone(event)" focusOut="onFocusOutTelefone(event)" />
+			</s:HGroup>
+			
+		</s:VGroup>
+
+		
+		
+		<s:HGroup width="100%" paddingTop="10">
+			<s:VGroup width="50%" horizontalAlign="left">
+				<s:Button label="Cancelar" click="onTapCancelar(event)" />
+			</s:VGroup>
+			<s:VGroup width="50%" horizontalAlign="right">
+				<s:Button label="Adicionar" click="onTapAdicionar(event)" />
+			</s:VGroup>
+			
+		</s:HGroup>
+	</s:VGroup>
+	
+	
+</s:Panel>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="HomeView"
+		backgroundColor="0xFF4400"
+		initialize="init()">
+	
+	<fx:Script>
+		<![CDATA[
+			import spark.transitions.FlipViewTransition;
+			import spark.transitions.FlipViewTransitionMode;
+			import spark.transitions.ViewTransitionDirection;
+			
+			private var contatosView:TesteView;
+			
+			public function init(): void{
+				contatosView = new TesteView();
+			}
+			protected function onTapTesteView(event:MouseEvent):void
+			{
+				// TODO Auto-generated method stub
+				var flipTransition:FlipViewTransition = new FlipViewTransition();
+				flipTransition.direction = ViewTransitionDirection.LEFT;
+				flipTransition.mode = FlipViewTransitionMode.CUBE;
+				navigator.pushView(TesteView, null, null, flipTransition);
+			}
+		]]>
+	</fx:Script>
+	
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<s:VGroup width="100%" height="100%">
+		<s:VGroup  width="100%" height="50%" verticalAlign="middle" horizontalAlign="center">
+			<s:Label text="Hello World!" fontSize="30" />
+		</s:VGroup>
+		
+		<s:HGroup  width="100%" height="50%" verticalAlign="middle" horizontalAlign="center">
+			<s:Button label="Auxiliar View" click="navigator.pushView(AuxiliarView)" />  
+			<s:Button label="Contatos" click="onTapTesteView(event)" />
+		</s:HGroup>
+	</s:VGroup>
+	
+	
+	
+</s:View>
